@@ -47,6 +47,7 @@ class ECGEncoder(timm.models.vision_transformer.VisionTransformer):
 
         if localized:
             outcome = x[:, 1:]
+            outcome = self.fc_norm(outcome)
         elif self.global_pool == "attention_pool":
             q = x[:, 1:, :].mean(dim=1, keepdim=True)
             k = x[:, 1:, :]
